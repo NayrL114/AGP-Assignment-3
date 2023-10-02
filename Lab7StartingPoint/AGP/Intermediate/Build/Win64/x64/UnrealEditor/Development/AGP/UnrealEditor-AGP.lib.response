@@ -1,0 +1,37 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-AGP.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\AGPEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_1.h.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\AGP.init.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\AGPGameModeBase.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\BaseCharacter.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\EnemyCharacter.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\HealthComponent.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\NavigationNode.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PathfindingSubsystem.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PickupBase.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PickupBounceComponent.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PickupRotatorComponent.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PlayerCharacter.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\ProceduralLandscape.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\WeaponPickup.gen.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\AGP.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\AGPGameModeBase.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PickupBounceComponent.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PickupRotatorComponent.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\BaseCharacter.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\EnemyCharacter.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\HealthComponent.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PlayerCharacter.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\ProceduralLandscape.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\NavigationNode.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PathfindingSubsystem.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\PickupBase.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\WeaponPickup.cpp.obj"
+"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\Default.rc2.res"
+/OUT:"D:\Ryan\Study\University\2023 Spring\41024 AGP\Assignment 3\Lab7StartingPoint\AGP\Intermediate\Build\Win64\x64\UnrealEditor\Development\AGP\UnrealEditor-AGP.lib"

@@ -1,0 +1,31 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\source\\agp\\pickups\\weaponpickup.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\x64\\agpeditor\\development\\engine\\sharedpch.engine.shadowerrors.inclorderunreal5_1.h.pch",
+        "Includes": [
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\agp\\definitions.agp.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\source\\agp\\pickups\\weaponpickup.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\source\\agp\\pickups\\pickupbase.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\unrealeditor\\inc\\agp\\uht\\pickupbase.generated.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\unrealeditor\\inc\\agp\\uht\\weaponpickup.generated.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\source\\agp\\characters\\playercharacter.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\source\\runtime\\experimental\\iris\\core\\public\\iris\\serialization\\irisobjectreferencepackagemap.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\iriscore\\uht\\irisobjectreferencepackagemap.generated.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementreplication.generated.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\source\\agp\\characters\\basecharacter.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\unrealeditor\\inc\\agp\\uht\\basecharacter.generated.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputactionvalue.h",
+            "d:\\epicgames\\game install\\ue_5.2\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputactionvalue.generated.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\unrealeditor\\inc\\agp\\uht\\playercharacter.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

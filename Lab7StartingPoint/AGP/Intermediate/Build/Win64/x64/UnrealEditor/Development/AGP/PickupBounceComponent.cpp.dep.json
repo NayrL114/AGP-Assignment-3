@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\source\\agp\\pickupbouncecomponent.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\x64\\agpeditor\\development\\engine\\sharedpch.engine.shadowerrors.inclorderunreal5_1.h.pch",
+        "Includes": [
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\agp\\definitions.agp.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\source\\agp\\pickupbouncecomponent.h",
+            "d:\\ryan\\study\\university\\2023 spring\\41024 agp\\assignment 3\\lab7startingpoint\\agp\\intermediate\\build\\win64\\unrealeditor\\inc\\agp\\uht\\pickupbouncecomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

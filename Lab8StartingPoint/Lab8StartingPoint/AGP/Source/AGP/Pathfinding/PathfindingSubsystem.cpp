@@ -73,17 +73,27 @@ void UPathfindingSubsystem::GenerateNodeOnCharacterLocation()
 	//	//}
 	//}
 
-	CharacterLocations.Empty();
+	//CharacterLocations.Empty();
+
+	if (CharacterLocations.Num() == 0) 
+	{
+		return;
+	}
+
+	int i = 0;
 
 	// Find all BaseCharacter actors on the level, and spawn a navigation node based on their location. 
 	for (TActorIterator<ABaseCharacter> It(GetWorld()); It; ++It)
 	{
+		CharacterLocations[i]->SetActorLocation(It->GetActorLocation());
+		i++;
 		//It->GetActorLocation();
 		//Nodes.Add(*It);
 		//UE_LOG(LogTemp, Warning, TEXT("NODE: %s"), *(*It)->GetActorLocation().ToString())
-		if (ANavigationNode* Node = GetWorld()->SpawnActor<ANavigationNode>())
-		{
-			Node->SetActorLocation(It->GetActorLocation());
+		//if (ANavigationNode* Node = GetWorld()->SpawnActor<ANavigationNode>())
+
+		//{
+		/*	Node->SetActorLocation(It->GetActorLocation());
 
 			Node->AddNodeConnection(FindNearestNode(It->GetActorLocation()));
 			
@@ -103,7 +113,7 @@ void UPathfindingSubsystem::GenerateNodeOnCharacterLocation()
 		else
 		{
 			UE_LOG(LogTemp, Error, TEXT("Unable to spawn a node on base character location. This is bad!"))
-		}
+		}*/
 	}
 }
 
@@ -111,7 +121,7 @@ void UPathfindingSubsystem::PlaceProceduralNodes(const TArray<FVector>& Landscap
 {
 	// Need to destroy all of the current nodes in the world.
 	RemoveAllNodes();
-	
+
 	// Then create and place all the nodes and store them in the ProcedurallyPlacedNodes array.
 	for (int Y = 0; Y < MapHeight; Y++)
 	{
@@ -122,16 +132,50 @@ void UPathfindingSubsystem::PlaceProceduralNodes(const TArray<FVector>& Landscap
 			{
 				Node->SetActorLocation(LandscapeVertexData[Y * MapWidth + X]);
 				ProcedurallyPlacedNodes.Add(Node);
-			} else
+			}
+			else
 			{
 				UE_LOG(LogTemp, Error, TEXT("Unable to spawn a node for some reason. This is bad!"))
 			}
-			
+
 		}
 	}
 
+
 	// Than generate nodes on all base character's location. 
 	//GenerateNodeOnCharacterLocation();
+	for (TActorIterator<ABaseCharacter> It(GetWorld()); It; ++It)
+	{
+		//It->GetActorLocation();
+		//Nodes.Add(*It);
+		//UE_LOG(LogTemp, Warning, TEXT("NODE: %s"), *(*It)->GetActorLocation().ToString())
+		if (ANavigationNode* Node = GetWorld()->SpawnActor<ANavigationNode>())
+		{
+			Node->SetActorLocation(It->GetActorLocation());
+
+			//Node->AddNodeConnection(FindNearestNode(It->GetActorLocation()));
+
+			CharacterLocations.Add(Node);
+
+			ProcedurallyPlacedNodes.Add(Node);
+
+			/*if (ProcedurallyPlacedNodes.Num() != 0)
+			{
+				ProcedurallyPlacedNodes.Add(Node);
+			}*/
+
+			/*if (Nodes.Num() != 0)
+			{
+				Nodes.Add(Node);
+			}*/
+
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Unable to spawn a node on base character location when generating. This is bad!"))
+		}
+	}
+
 
 	// Then add connections between all adjacent nodes.
 	for (int Y = 0; Y < MapHeight; Y++)

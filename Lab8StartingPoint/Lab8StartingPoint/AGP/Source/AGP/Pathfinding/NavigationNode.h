@@ -39,4 +39,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//
+	void AddNodeConnection(ANavigationNode* TargetNode);
+	//
+	TArray<ANavigationNode*> GetConnectedNodes();
+	//
+	void RemoveNodeConnections();
+
 };

@@ -56,12 +56,16 @@ public:
 	 */
 	void PlaceProceduralNodes(const TArray<FVector>& LandscapeVertexData, int32 MapWidth, int32 MapHeight);
 
+	void GenerateNodeOnCharacterLocation();
+
 protected:
 	
 	TArray<ANavigationNode*> Nodes;
 
 	// Procedural Map Logic
 	TArray<ANavigationNode*> ProcedurallyPlacedNodes;
+
+	TArray<ANavigationNode*> CharacterLocations;
 
 private:
 

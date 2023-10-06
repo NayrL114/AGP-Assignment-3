@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "NavigationNode.h"
+
+
 
 // Sets default values
 ANavigationNode::ANavigationNode()
@@ -22,12 +23,38 @@ void ANavigationNode::BeginPlay()
 	
 }
 
+//
+void ANavigationNode::AddNodeConnection(ANavigationNode* TargetNode)
+{
+	ConnectedNodes.Add(TargetNode);
+	TargetNode->GetConnectedNodes().Add(this);
+}
+
+//
+TArray<ANavigationNode*> ANavigationNode::GetConnectedNodes() 
+{
+	return ConnectedNodes;
+}
+
+//
+void ANavigationNode::RemoveNodeConnections()
+{
+	for (ANavigationNode* Node : ConnectedNodes) 
+	{
+		if (Node->GetConnectedNodes().Contains(this)) 
+		{
+			Node->GetConnectedNodes().Remove(this);
+		}
+		
+	}
+}
+
 // Called every frame
 void ANavigationNode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	/*FColor SphereColor = FColor::Blue;
+	FColor SphereColor = FColor::Blue;
 	if (ConnectedNodes.Contains(this))
 	{
 		SphereColor = FColor::Red;
@@ -47,7 +74,8 @@ void ANavigationNode::Tick(float DeltaTime)
 			DrawDebugLine(GetWorld(), GetActorLocation(), ConnectedNode->GetActorLocation(),
 				LineColor, false, -1, 0, 5.0f);
 		}
-	}*/
+	}	
+
 }
 
 bool ANavigationNode::ShouldTickIfViewportsOnly() const

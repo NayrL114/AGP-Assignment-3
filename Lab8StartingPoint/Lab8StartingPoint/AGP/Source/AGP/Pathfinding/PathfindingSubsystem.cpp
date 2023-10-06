@@ -3,6 +3,10 @@
 
 #include "PathfindingSubsystem.h"
 
+#include "../Characters/BaseCharacter.h"
+#include "../Characters/PlayerCharacter.h"
+#include "../Characters/EnemyCharacter.h"
+
 #include "EngineUtils.h"
 #include "NavigationNode.h"
 
@@ -40,6 +44,69 @@ TArray<FVector> UPathfindingSubsystem::GetPathAway(const FVector& StartLocation,
 	return GetPath(FindNearestNode(StartLocation), FindFurthestNode(TargetLocation));
 }
 
+
+void UPathfindingSubsystem::GenerateNodeOnCharacterLocation() 
+{
+	// This section of code is for removing the navigation node spawned based on character locations
+	//if (ProcedurallyPlacedNodes.Num() != 0)
+	//{
+	//	//ProcedurallyPlacedNodes.Add(Node);
+	//	//for (ANavigationNode* Node : CharacterLocations) 
+	//	//{
+	//		if (ProcedurallyPlacedNodes.Contains(Node))
+	//		{
+	//			Node->RemoveNodeConnections();
+	//			ProcedurallyPlacedNodes.Remove(Node);
+	//		}
+	//	//}
+	//}
+
+	//if (Nodes.Num() != 0)
+	//{
+	//	//for (ANavigationNode* Node : CharacterLocations)
+	//	//{
+	//		if (Nodes.Contains(Node))
+	//		{
+	//			Node->RemoveNodeConnections();
+	//			Nodes.Remove(Node);
+	//		}
+	//	//}
+	//}
+
+	CharacterLocations.Empty();
+
+	// Find all BaseCharacter actors on the level, and spawn a navigation node based on their location. 
+	for (TActorIterator<ABaseCharacter> It(GetWorld()); It; ++It)
+	{
+		//It->GetActorLocation();
+		//Nodes.Add(*It);
+		//UE_LOG(LogTemp, Warning, TEXT("NODE: %s"), *(*It)->GetActorLocation().ToString())
+		if (ANavigationNode* Node = GetWorld()->SpawnActor<ANavigationNode>())
+		{
+			Node->SetActorLocation(It->GetActorLocation());
+
+			Node->AddNodeConnection(FindNearestNode(It->GetActorLocation()));
+			
+			CharacterLocations.Add(Node);
+
+			if (ProcedurallyPlacedNodes.Num() != 0) 
+			{
+				ProcedurallyPlacedNodes.Add(Node);
+			}
+
+			if (Nodes.Num() != 0)
+			{
+				Nodes.Add(Node);
+			}
+
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Unable to spawn a node on base character location. This is bad!"))
+		}
+	}
+}
+
 void UPathfindingSubsystem::PlaceProceduralNodes(const TArray<FVector>& LandscapeVertexData, int32 MapWidth, int32 MapHeight)
 {
 	// Need to destroy all of the current nodes in the world.
@@ -62,6 +129,10 @@ void UPathfindingSubsystem::PlaceProceduralNodes(const TArray<FVector>& Landscap
 			
 		}
 	}
+
+	// Than generate nodes on all base character's location. 
+	//GenerateNodeOnCharacterLocation();
+
 	// Then add connections between all adjacent nodes.
 	for (int Y = 0; Y < MapHeight; Y++)
 	{

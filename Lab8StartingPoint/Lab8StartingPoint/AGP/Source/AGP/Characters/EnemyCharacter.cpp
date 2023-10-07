@@ -41,19 +41,40 @@ void AEnemyCharacter::MoveAlongPath()
 	// Execute the path. Should be called each tick.
 
 	// If the path is empty do nothing.
-	if (CurrentPath.IsEmpty()) return;
+	//if (CurrentPath.IsEmpty()) return;
 	
-	// 1. Move towards the current stage of the path.
-	//		a. Calculate the direction from the current position to the target of the current stage of the path.
-	FVector MovementDirection = CurrentPath[CurrentPath.Num()-1] - GetActorLocation();
-	MovementDirection.Normalize();
-	//		b. Apply movement in that direction.
-	AddMovementInput(MovementDirection);
-	// 2. Check if it is close to the current stage of the path then pop it off.
-	if (FVector::Distance(GetActorLocation(), CurrentPath[CurrentPath.Num() - 1]) < PathfindingError)
+	if (SensedCharacter && CurrentState != EEnemyState::Evade) 
 	{
-		CurrentPath.Pop();
+		// Move directly towards player
+		FVector MovementDirection = LastKnownPlayerLocation - GetActorLocation();
+		MovementDirection.Normalize();
+		AddMovementInput(MovementDirection);
 	}
+	else if (!CurrentPath.IsEmpty())
+	{
+		//if (LastKnownPlayerLocation) {
+		//	// Move towards the last known player location.
+		//	FVector MovementDirection = LastKnownPlayerLocation - GetActorLocation();
+		//	MovementDirection.Normalize();
+		//	AddMovementInput(MovementDirection);
+		//}
+		//else if (!CurrentPath.IsEmpty())
+		{
+			// 1. Move towards the current stage of the path.
+			//		a. Calculate the direction from the current position to the target of the current stage of the path.
+			FVector MovementDirection = CurrentPath[CurrentPath.Num() - 1] - GetActorLocation();
+			MovementDirection.Normalize();
+			//		b. Apply movement in that direction.
+			AddMovementInput(MovementDirection);
+			// 2. Check if it is close to the current stage of the path then pop it off.
+			if (FVector::Distance(GetActorLocation(), CurrentPath[CurrentPath.Num() - 1]) < PathfindingError)
+			{
+				CurrentPath.Pop();
+			}
+		}
+		
+	}
+	
 }
 
 void AEnemyCharacter::TickPatrol()
@@ -68,12 +89,23 @@ void AEnemyCharacter::TickPatrol()
 void AEnemyCharacter::TickEngage()
 {
 	
-	if (!SensedCharacter) return;
+	//if (!SensedCharacter) return;
+	if (!SensedCharacter)
+	{
+		if (LastKnownPlayerLocation != FVector(0, 0, 0)) 
+		{
+			CurrentPath = PathfindingSubsystem->GetPath(GetActorLocation(), LastKnownPlayerLocation);
+		}
+		else 
+		{
+			return;
+		}
+	}
 	
-	if (CurrentPath.IsEmpty())
+	/*if (CurrentPath.IsEmpty())
 	{
 		CurrentPath = PathfindingSubsystem->GetPath(GetActorLocation(), SensedCharacter->GetActorLocation());
-	}
+	}*/
 	MoveAlongPath();
 	if (HasWeapon())
 	{
@@ -95,6 +127,16 @@ void AEnemyCharacter::TickEvade()
 		CurrentPath = PathfindingSubsystem->GetPathAway(GetActorLocation(), SensedCharacter->GetActorLocation());
 	}
 	MoveAlongPath();
+
+	// Enemy AI can still engage with player while evading
+	if (HasWeapon())
+	{
+		if (WeaponComponent->IsMagazineEmpty())
+		{
+			Reload();
+		}
+		Fire(SensedCharacter->GetActorLocation());
+	}
 }
 
 void AEnemyCharacter::OnSensedPawn(APawn* SensedActor)
@@ -103,6 +145,7 @@ void AEnemyCharacter::OnSensedPawn(APawn* SensedActor)
 	{
 		SensedCharacter = Player;
 		//UE_LOG(LogTemp, Display, TEXT("Sensed Player"))
+		LastKnownPlayerLocation = SensedCharacter->GetActorLocation();
 	}
 }
 

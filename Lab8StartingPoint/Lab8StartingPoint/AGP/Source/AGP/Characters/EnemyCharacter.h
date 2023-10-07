@@ -92,6 +92,9 @@ protected:
 	UPROPERTY()
 	APlayerCharacter* SensedCharacter = nullptr;
 
+	UPROPERTY()
+	FVector LastKnownPlayerLocation = FVector(0, 0, 0);
+
 	/**
 	 * An array of vectors representing the current path that the agent is traversing along.
 	 */

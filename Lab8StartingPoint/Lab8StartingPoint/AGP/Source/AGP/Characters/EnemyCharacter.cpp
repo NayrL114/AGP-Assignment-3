@@ -75,6 +75,7 @@ void AEnemyCharacter::MoveAlongPath()
 			// 2. Check if it is close to the current stage of the path then pop it off.
 			if (FVector::Distance(GetActorLocation(), CurrentPath[CurrentPath.Num() - 1]) < PathfindingError)
 			{
+				// Draw a debug sphere to indicate that AI has reached to this location. 
 				DrawDebugSphere(GetWorld(), 
 					FVector(CurrentPath[CurrentPath.Num() - 1].X, CurrentPath[CurrentPath.Num() - 1].Y, CurrentPath[CurrentPath.Num() - 1].Z + 50),
 						50.0f, 4, FColor::Red, true, -1, 0, 5.0f);
@@ -242,5 +243,8 @@ APlayerCharacter* AEnemyCharacter::FindPlayer() const
 		UE_LOG(LogTemp, Error, TEXT("Unable to find the Player Character in the world."))
 	}
 	return Player;
+
+
+	
 }
 

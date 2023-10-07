@@ -56,11 +56,37 @@ TArray<FVector> UPathfindingSubsystem::GetPatrolPath(const FVector& StartLocatio
 	}
 
 	// Find a node that AI has never been visited. 
-	ANavigationNode* UnvisitedTargetLocation = nullptr;
+	ANavigationNode* UnvisitedTargetLocation = nullptr;	
+
+	int i = 0;
+	TArray<ANavigationNode*> NearestNodes;
+	if (FindNearestNode(StartLocation)->ConnectedNodes.Num() != 0) NearestNodes = FindNearestNode(StartLocation)->ConnectedNodes;
+
+	TArray<int> VisitedIndexs = TArray<int>();
+
 	do 
 	{
+		int a = 0;
+		//if (NearestNodes = FindNearestNode(StartLocation)->ConnectedNodes)
+		//{
+			//if (NearestNodes.Num() != 0 && i < NearestNodes.Num())
+		if (i < NearestNodes.Num())
+		{
+			//UnvisitedTargetLocation = NearestNodes[i];
+			do
+			{
+				a = FMath::RandRange(0, NearestNodes.Num() - 1);				
+			} while (VisitedIndexs.Contains(a));
+
+			UnvisitedTargetLocation = NearestNodes[a];
+			VisitedIndexs.Add(a);
+
+			i++;
+			continue; // Skil the get random node part and continue the larger do section
+		}			
+		//}
 		UnvisitedTargetLocation = GetRandomNode();
-	} 	while (PatrolledRoutes.Contains(UnvisitedTargetLocation->GetActorLocation()));
+	} while (PatrolledRoutes.Contains(UnvisitedTargetLocation->GetActorLocation()));
 
 	// Generate a patrol route with the end point as the never visited node. 
 	TArray<FVector> NewPath = GetPath(FindNearestNode(StartLocation), UnvisitedTargetLocation);

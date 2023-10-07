@@ -44,7 +44,42 @@ TArray<FVector> UPathfindingSubsystem::GetPathAway(const FVector& StartLocation,
 	return GetPath(FindNearestNode(StartLocation), FindFurthestNode(TargetLocation));
 }
 
+// This function will generate a patrol path, 
+// that at least have the end point as a navigation node that has never been reached by the AI. 
+TArray<FVector> UPathfindingSubsystem::GetPatrolPath(const FVector& StartLocation)
+{
+	// Check if the AI had been visited all the nodes on the map. 
+	if (PatrolledRoutes.Num() >= Nodes.Num())
+	{
+		UE_LOG(LogTemp, Display, TEXT("Now AI has visited all the navigagtion nodes on the map. Resetting patrolled routes array. "));
+		PatrolledRoutes.Empty();
+	}
 
+	// Find a node that AI has never been visited. 
+	ANavigationNode* UnvisitedTargetLocation = nullptr;
+	do 
+	{
+		UnvisitedTargetLocation = GetRandomNode();
+	} 	while (PatrolledRoutes.Contains(UnvisitedTargetLocation->GetActorLocation()));
+
+	// Generate a patrol route with the end point as the never visited node. 
+	TArray<FVector> NewPath = GetPath(FindNearestNode(StartLocation), UnvisitedTargetLocation);
+		
+	// Record the path into patrolled routes node array. 
+	for (FVector Node : NewPath)
+	{
+		if (!PatrolledRoutes.Contains(Node))
+		{
+			//UE_LOG(LogTemp, Display, TEXT("Adding %f, %f, %f into patrolled routes array"), Node.X, Node.Y, Node.Z);
+			PatrolledRoutes.Add(Node);
+		}
+	}
+
+	// Send the patrol path back to AI. 
+	return NewPath;
+}
+
+// For now this function is not active at all
 void UPathfindingSubsystem::GenerateNodeOnCharacterLocation() 
 {
 	// This section of code is for removing the navigation node spawned based on character locations

@@ -42,15 +42,21 @@ void AEnemyCharacter::MoveAlongPath()
 
 	// If the path is empty do nothing.
 	//if (CurrentPath.IsEmpty()) return;
-	
-	if (SensedCharacter && CurrentState != EEnemyState::Evade) 
+		
+	// If AI is in Engage state, and have direct sight on player, 
+	// Move directly into player. 
+
+	// In actual implementation, additional check needed to ensure AI will engage player in correct state. 
+	// In the following code, the AI will never enter engage state, so this section won't be executed. 
+
+	if (SensedCharacter && CurrentState == EEnemyState::Engage) 
 	{
 		// Move directly towards player
 		FVector MovementDirection = LastKnownPlayerLocation - GetActorLocation();
 		MovementDirection.Normalize();
 		AddMovementInput(MovementDirection);
 	}
-	else if (!CurrentPath.IsEmpty())
+	else if (!CurrentPath.IsEmpty()) // If AI does have a path
 	{
 		//if (LastKnownPlayerLocation) {
 		//	// Move towards the last known player location.
@@ -69,7 +75,10 @@ void AEnemyCharacter::MoveAlongPath()
 			// 2. Check if it is close to the current stage of the path then pop it off.
 			if (FVector::Distance(GetActorLocation(), CurrentPath[CurrentPath.Num() - 1]) < PathfindingError)
 			{
-				CurrentPath.Pop();
+				DrawDebugSphere(GetWorld(), 
+					FVector(CurrentPath[CurrentPath.Num() - 1].X, CurrentPath[CurrentPath.Num() - 1].Y, CurrentPath[CurrentPath.Num() - 1].Z + 50),
+						50.0f, 4, FColor::Red, true, -1, 0, 5.0f);
+				CurrentPath.Pop();				
 			}
 		}
 		
@@ -79,9 +88,11 @@ void AEnemyCharacter::MoveAlongPath()
 
 void AEnemyCharacter::TickPatrol()
 {
+	//UE_LOG(LogTemp, Display, TEXT("Now path is empty, generating new patrol path"));
 	if (CurrentPath.IsEmpty())
 	{
-		CurrentPath = PathfindingSubsystem->GetRandomPath(GetActorLocation());
+		//CurrentPath = PathfindingSubsystem->GetRandomPath(GetActorLocation());
+		CurrentPath = PathfindingSubsystem->GetPatrolPath(GetActorLocation());
 	}
 	MoveAlongPath();
 }
@@ -174,7 +185,7 @@ void AEnemyCharacter::Tick(float DeltaTime)
 	{
 	case EEnemyState::Patrol:
 		TickPatrol();
-		if (SensedCharacter)
+		/*if (SensedCharacter)
 		{
 			if (HealthComponent->GetCurrentHealthPercentage() >= 0.4f)
 			{
@@ -184,9 +195,9 @@ void AEnemyCharacter::Tick(float DeltaTime)
 				CurrentState = EEnemyState::Evade;
 			}
 			CurrentPath.Empty();
-		}
+		}*/
 		break;
-	case EEnemyState::Engage:
+	/*case EEnemyState::Engage:
 		TickEngage();
 		if (HealthComponent->GetCurrentHealthPercentage() < 0.4f)
 		{
@@ -196,7 +207,7 @@ void AEnemyCharacter::Tick(float DeltaTime)
 		{
 			CurrentState = EEnemyState::Patrol;
 		}
-		break;
+		break;*/
 	case EEnemyState::Evade:
 		TickEvade();
 		if (HealthComponent->GetCurrentHealthPercentage() >= 0.4f)

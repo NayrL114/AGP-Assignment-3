@@ -45,6 +45,9 @@ public:
 	 */
 	TArray<FVector> GetPathAway(const FVector& StartLocation, const FVector& TargetLocation);
 
+
+	TArray<FVector> GetPatrolPath(const FVector& StartLocation);
+
 	// Procedural Map Logic
 	/**
 	 * Will place down navigation nodes at the vertex positions, excluding the edge vertex positions and
@@ -66,6 +69,9 @@ protected:
 	TArray<ANavigationNode*> ProcedurallyPlacedNodes;
 
 	TArray<ANavigationNode*> CharacterLocations;
+
+	UPROPERTY(VisibleAnywhere)
+	TArray<FVector> PatrolledRoutes;
 
 private:
 

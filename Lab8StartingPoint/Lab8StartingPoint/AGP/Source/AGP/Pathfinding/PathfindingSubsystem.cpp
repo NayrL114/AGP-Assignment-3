@@ -48,6 +48,13 @@ TArray<FVector> UPathfindingSubsystem::GetPathAway(const FVector& StartLocation,
 // that at least have the end point as a navigation node that has never been reached by the AI. 
 TArray<FVector> UPathfindingSubsystem::GetPatrolPath(const FVector& StartLocation)
 {
+	// Guard Condition
+	if (Nodes.Num() == 0)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No Navigation Points on this map"))
+			return TArray<FVector>();
+	}
+
 	// Check if the AI had been visited all the nodes on the map. 
 	if (PatrolledRoutes.Num() >= Nodes.Num())
 	{

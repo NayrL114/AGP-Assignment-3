@@ -13,6 +13,13 @@ ABaseCharacter::ABaseCharacter()
 	BulletStartPosition = CreateDefaultSubobject<USceneComponent>("Bullet Start");
 	BulletStartPosition->SetupAttachment(GetRootComponent());
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>("Health Component");
+
+	FootPosition = CreateDefaultSubobject<USceneComponent>("Foot Position");
+	FootPosition->SetupAttachment(GetRootComponent());
+
+	WaistPosition = CreateDefaultSubobject<USceneComponent>("Waist Position");
+	WaistPosition->SetupAttachment(GetRootComponent());
+
 }
 
 // Called when the game starts or when spawned

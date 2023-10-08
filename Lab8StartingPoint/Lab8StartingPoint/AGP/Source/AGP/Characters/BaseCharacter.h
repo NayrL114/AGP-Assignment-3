@@ -42,6 +42,14 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* BulletStartPosition;
 
+	// Property for making AI jump
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* FootPosition;
+
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* WaistPosition;
+
+
 	/**
 	 * A component that holds information about the health of the character. This component has functions
 	 * for damaging the character and healing the character.

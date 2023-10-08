@@ -114,6 +114,9 @@ protected:
 	UPROPERTY(EditAnywhere)
 	float PathfindingError = 150.0f; // 150 cm from target by default.
 
+	bool isFootStuck = true;
+	bool isCharacterStuck = true;
+
 public:	
 
 	virtual void Tick(float DeltaTime) override;

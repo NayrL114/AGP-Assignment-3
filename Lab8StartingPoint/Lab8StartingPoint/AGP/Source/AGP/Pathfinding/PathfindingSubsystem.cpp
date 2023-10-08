@@ -67,7 +67,15 @@ TArray<FVector> UPathfindingSubsystem::GetPatrolPath(const FVector& StartLocatio
 
 	int i = 0;
 	TArray<ANavigationNode*> NearestNodes;
-	if (FindNearestNode(StartLocation)->ConnectedNodes.Num() != 0) NearestNodes = FindNearestNode(StartLocation)->ConnectedNodes;
+	//UE_LOG()
+	//if (FindNearestNode(StartLocation)->ConnectedNo)
+	if (ANavigationNode* CloestNode = FindNearestNode(StartLocation))
+	{
+		if (CloestNode->ConnectedNodes.Num() != 0)
+		{
+			NearestNodes = FindNearestNode(StartLocation)->ConnectedNodes;
+		}
+	}
 
 	TArray<int> VisitedIndexs = TArray<int>();
 
@@ -112,119 +120,6 @@ TArray<FVector> UPathfindingSubsystem::GetPatrolPath(const FVector& StartLocatio
 	return NewPath;
 }
 
-// For now this function is not active at all
-void UPathfindingSubsystem::GenerateNodeOnCharacterLocation() 
-{
-	// This section of code is for removing the navigation node spawned based on character locations
-	//if (ProcedurallyPlacedNodes.Num() != 0)
-	//{
-	//	//ProcedurallyPlacedNodes.Add(Node);
-	//	//for (ANavigationNode* Node : CharacterLocations) 
-	//	//{
-	//		if (ProcedurallyPlacedNodes.Contains(Node))
-	//		{
-	//			Node->RemoveNodeConnections();
-	//			ProcedurallyPlacedNodes.Remove(Node);
-	//		}
-	//	//}
-	//}
-
-	//if (Nodes.Num() != 0)
-	//{
-	//	//for (ANavigationNode* Node : CharacterLocations)
-	//	//{
-	//		if (Nodes.Contains(Node))
-	//		{
-	//			Node->RemoveNodeConnections();
-	//			Nodes.Remove(Node);
-	//		}
-	//	//}
-	//}
-
-	//CharacterLocations.Empty();
-
-	CharacterLocations.Empty();
-
-	// Than generate nodes on all base character's location. 
-	//GenerateNodeOnCharacterLocation();
-	for (TActorIterator<ABaseCharacter> It(GetWorld()); It; ++It)
-	{
-		//It->GetActorLocation();
-		//Nodes.Add(*It);
-		//UE_LOG(LogTemp, Warning, TEXT("NODE: %s"), *(*It)->GetActorLocation().ToString())
-		if (ANavigationNode* Node = GetWorld()->SpawnActor<ANavigationNode>())
-		{
-			Node->SetActorLocation(It->GetActorLocation());
-
-			//Node->AddNodeConnection(FindNearestNode(It->GetActorLocation()));
-
-			CharacterLocations.Add(Node);
-
-			//ProcedurallyPlacedNodes.Add(Node);
-
-			/*if (ProcedurallyPlacedNodes.Num() != 0)
-			{
-				ProcedurallyPlacedNodes.Add(Node);
-			}*/
-
-			/*if (Nodes.Num() != 0)
-			{
-				Nodes.Add(Node);
-			}*/
-
-		}
-		else
-		{
-			UE_LOG(LogTemp, Error, TEXT("Unable to spawn a node on base character location in GenerateNodeOnCharacterLocation. This is bad!"))
-		}
-	}
-
-	//if (CharacterLocations.Num() == 0) 
-	//{
-	//	return;
-	//}
-
-	//int i = 0;
-
-	//// Find all BaseCharacter actors on the level, and spawn a navigation node based on their location. 
-	//for (TActorIterator<ABaseCharacter> It(GetWorld()); It; ++It)
-	//{
-	//	UE_LOG(LogTemp, Display, TEXT("Now there are %d BaseCharacters on the field."), CharacterLocations.Num());
-	//	if (i < CharacterLocations.Num()) 
-	//	{
-	//		CharacterLocations[i]->SetActorLocation(It->GetActorLocation());			
-	//	}
-	//	i++;
-	//	
-	//	//It->GetActorLocation();
-	//	//Nodes.Add(*It);
-	//	//UE_LOG(LogTemp, Warning, TEXT("NODE: %s"), *(*It)->GetActorLocation().ToString())
-	//	//if (ANavigationNode* Node = GetWorld()->SpawnActor<ANavigationNode>())
-
-	//	//{
-	//	/*	Node->SetActorLocation(It->GetActorLocation());
-
-	//		Node->AddNodeConnection(FindNearestNode(It->GetActorLocation()));
-	//		
-	//		CharacterLocations.Add(Node);
-
-	//		if (ProcedurallyPlacedNodes.Num() != 0) 
-	//		{
-	//			ProcedurallyPlacedNodes.Add(Node);
-	//		}
-
-	//		if (Nodes.Num() != 0)
-	//		{
-	//			Nodes.Add(Node);
-	//		}
-
-	//	}
-	//	else
-	//	{
-	//		UE_LOG(LogTemp, Error, TEXT("Unable to spawn a node on base character location. This is bad!"))
-	//	}*/
-	//}
-}// end of: GenerateNodeOnCharacterLocation()
 
 void UPathfindingSubsystem::PlaceProceduralNodes(const TArray<FVector>& LandscapeVertexData, int32 MapWidth, int32 MapHeight)
 {
@@ -249,43 +144,6 @@ void UPathfindingSubsystem::PlaceProceduralNodes(const TArray<FVector>& Landscap
 
 		}
 	}
-
-	//CharacterLocations.Empty();
-
-	//// Than generate nodes on all base character's location. 
-	////GenerateNodeOnCharacterLocation();
-	//for (TActorIterator<ABaseCharacter> It(GetWorld()); It; ++It)
-	//{
-	//	//It->GetActorLocation();
-	//	//Nodes.Add(*It);
-	//	//UE_LOG(LogTemp, Warning, TEXT("NODE: %s"), *(*It)->GetActorLocation().ToString())
-	//	if (ANavigationNode* Node = GetWorld()->SpawnActor<ANavigationNode>())
-	//	{
-	//		Node->SetActorLocation(It->GetActorLocation());
-
-	//		//Node->AddNodeConnection(FindNearestNode(It->GetActorLocation()));
-
-	//		CharacterLocations.Add(Node);
-
-	//		ProcedurallyPlacedNodes.Add(Node);
-
-	//		/*if (ProcedurallyPlacedNodes.Num() != 0)
-	//		{
-	//			ProcedurallyPlacedNodes.Add(Node);
-	//		}*/
-
-	//		/*if (Nodes.Num() != 0)
-	//		{
-	//			Nodes.Add(Node);
-	//		}*/
-
-	//	}
-	//	else
-	//	{
-	//		UE_LOG(LogTemp, Error, TEXT("Unable to spawn a node on base character location when generating. This is bad!"))
-	//	}
-	//}
-
 
 	// Then add connections between all adjacent nodes.
 	for (int Y = 0; Y < MapHeight; Y++)
@@ -376,8 +234,24 @@ ANavigationNode* UPathfindingSubsystem::FindNearestNode(const FVector& TargetLoc
 		const float Distance = FVector::Distance(TargetLocation, Node->GetActorLocation());
 		if (Distance < MinDistance)
 		{
+			//FHitResult HitResult;
+			//FCollisionQueryParams QueryParams;
+			////QueryParams.AddIgnoredActor(GetOwner());
+			//
+			//// If there is NOT a wall between both points, use the located node as cloest node. 
+			//// This should obtain a navigation point that is not located on the other side of the wall. 
+			//UE_LOG(LogTemp, Display, TEXT("Checking if there is a wall between nodes"));
+			//bool isWallInBetween = (GetWorld()->LineTraceSingleByChannel(HitResult, TargetLocation,
+			//	FVector(Node->GetActorLocation().X, Node->GetActorLocation().Y, Node->GetActorLocation().Z + 50),
+			//	ECC_WorldStatic, QueryParams));
+			//UE_LOG(LogTemp, Display, TEXT("Wall between nodes? %s"), (isWallInBetween == true) ? TEXT("True") : TEXT("False"));
+
+			//if (!isWallInBetween) 
+			//{
 			MinDistance = Distance;
 			ClosestNode = Node;
+			//}
+			
 		}
 	}
 

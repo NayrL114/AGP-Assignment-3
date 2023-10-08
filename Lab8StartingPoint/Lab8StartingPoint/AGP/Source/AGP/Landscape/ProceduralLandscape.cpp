@@ -133,14 +133,6 @@ void AProceduralLandscape::Tick(float DeltaTime)
 		bShouldRegenerate = false;
 	}
 
-	//if (UPathfindingSubsystem* PathfindingSubsystem = GetWorld()->GetSubsystem<UPathfindingSubsystem>())
-	//{
-	//	//PathfindingSubsystem->GenerateNodeOnCharacterLocation();
-	//}
-	//else
-	//{
-	//	UE_LOG(LogTemp, Error, TEXT("Can't find the pathfinding subsystem within tick function"))
-	//}
 
 }
 

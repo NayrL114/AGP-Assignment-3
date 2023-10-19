@@ -54,7 +54,8 @@ void AEnemyCharacter::MoveAlongPath()
 		UE_LOG(LogTemp, Display, TEXT("AI knows LastKnownPlayerLocation, moving towards there"));
 		UE_LOG(LogTemp, Display, TEXT("Distance to player is: %f"), FVector::Distance(GetActorLocation(), LastKnownPlayerLocation));
 
-		if (FVector::Distance(GetActorLocation(), LastKnownPlayerLocation) > PathfindingError)
+		//if (FVector::Distance(GetActorLocation(), LastKnownPlayerLocation) > PathfindingError)
+		if (FVector::Distance(GetActorLocation(), LastKnownPlayerLocation) > 300)
 		{
 			//LastKnownPlayerLocation = FVector(0, 0, 0);
 			// Move directly towards player
